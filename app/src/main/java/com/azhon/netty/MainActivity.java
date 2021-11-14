@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.azhon.netty.base.BaseActivity;
 import com.azhon.netty.bean.PkgDataBean;
 import com.azhon.netty.client.NettyClient;
+import com.azhon.netty.httpServer.HttpServer;
 import com.azhon.netty.server.NettyServer;
 import com.azhon.netty.server.ServerHandler;
 
@@ -53,6 +54,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 NettyServer nettyServer = new NettyServer();
                 nettyServer.setHandler(handler);
                 nettyServer.startServer();
+
+                // http 服务器
+                //new HttpServer().startHttpServer();
+
                 break;
             case R.id.btn_pkg:
                 List<ChannelHandlerContext> channels = ServerHandler.channels;
