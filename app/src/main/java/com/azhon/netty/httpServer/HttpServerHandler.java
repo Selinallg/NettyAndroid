@@ -157,6 +157,10 @@ public class HttpServerHandler extends ChannelInboundHandlerAdapter {
     private void response(ChannelHandlerContext ctx, String contentType, ByteBuf content, HttpResponseStatus status) {
         FullHttpResponse response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, status, content);
         response.headers().set(HttpHeaderNames.CONTENT_TYPE, contentType);
+        // 解决跨域问题
+        response.headers().add("Access-Control-Allow-Origin", "*");
+        response.headers().add("Access-Control-Allow-Methods", "GET, POST, PUT,DELETE,OPTIONS,PATCH");
+        response.headers().add("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
         ctx.writeAndFlush(response).addListener(ChannelFutureListener.CLOSE);
     }
 }

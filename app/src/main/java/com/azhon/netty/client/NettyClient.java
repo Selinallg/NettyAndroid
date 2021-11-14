@@ -8,9 +8,11 @@ import java.net.InetSocketAddress;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
+import io.netty.channel.AdaptiveRecvByteBufAllocator;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelOption;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
@@ -86,6 +88,11 @@ public class NettyClient {
                         @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
                             ChannelPipeline pipeline = socketChannel.pipeline();
+                            // .addLast(new IdleStateHandler(30, 10, 0))
+                            //参数1：代表读套接字超时的时间，例如30秒没收到数据会触发读超时回调;
+                            //参数2：代表写套接字超时时间，例如10秒没有进行写会触发写超时回调;
+                            //参数3：将在未执行读取或写入时触发超时回调，0代表不处理；读超时尽量设置大于写超时代表多次写超时时写心跳包，多次写了心跳数据仍然读超时代表当前连接错误，即可断开连接重新连接
+
                             pipeline.addLast(new IdleStateHandler(10, 0, 0));
                             //解决粘包
                             pipeline.addLast(new DelimiterBasedFrameDecoder(65535, delimiter));
@@ -97,6 +104,12 @@ public class NettyClient {
                             pipeline.addLast(new ClientHandler(NettyClient.this));
                         }
                     });
+//           // 设置相关参数
+            // 接收数据的缓冲区太小 解决办法：
+//            bootstrap.option(ChannelOption.RCVBUF_ALLOCATOR, new AdaptiveRecvByteBufAllocator(5000, 5000, 8000)); //接收缓冲区 最小值太小时数据接收不全
+//            bootstrap.option(ChannelOption.TCP_NODELAY, true); //无阻塞
+//            bootstrap.option(ChannelOption.SO_KEEPALIVE, true); //长连接
+//            bootstrap.option(ChannelOption.SO_TIMEOUT, 30000); //收发超时
             // 连接到服务端
             ChannelFuture channelFuture = bootstrap.connect(new InetSocketAddress(IP, PORT));
             // 添加连接状态监听
