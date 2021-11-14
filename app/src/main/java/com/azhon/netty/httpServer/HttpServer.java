@@ -11,6 +11,7 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.codec.http.HttpContentCompressor;
 import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpRequestDecoder;
 import io.netty.handler.codec.http.HttpResponseEncoder;
@@ -37,9 +38,15 @@ public class HttpServer {
                             // http服务器端对response编码
                             pipeline.addLast(new HttpResponseEncoder());
                             // 在处理POST消息体时需要加上
+                            // 此值设置的大小将会影响浏览器上传文件的大小
                             pipeline.addLast(new HttpObjectAggregator(65536));
                             // 处理发起的请求
                             pipeline.addLast(new HttpServerHandler());
+
+//                            // 处理发起的请求
+//                            pipeline.addLast(new HttpFileHandler());
+//                            //在HttpResponseEncoder序列化之前会对response对象进行HttpContentCompressor压缩
+//                            pipeline.addLast("compressor", new HttpContentCompressor());
                         }
                     });
             //绑定服务在7020端口上
