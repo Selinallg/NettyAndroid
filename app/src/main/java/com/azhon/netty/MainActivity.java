@@ -9,10 +9,9 @@ import android.widget.Toast;
 
 import com.azhon.netty.base.BaseActivity;
 import com.azhon.netty.bean.PkgDataBean;
-import com.azhon.netty.client.NettyClient;
-import com.azhon.netty.httpServer.HttpServer;
-import com.azhon.netty.server.NettyServer;
-import com.azhon.netty.server.ServerHandler;
+import com.azhon.netty.tcp.client.NettyClient;
+import com.azhon.netty.tcp.server.NettyServer;
+import com.azhon.netty.tcp.server.ServerHandler;
 
 import java.util.List;
 

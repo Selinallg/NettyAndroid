@@ -1,4 +1,4 @@
-package com.azhon.netty.client;
+package com.azhon.netty.tcp.client;
 
 import android.util.Log;
 
@@ -14,7 +14,7 @@ import io.netty.handler.timeout.IdleStateEvent;
 
 /**
  * 项目名:    Netty-Android
- * 包名       com.azhon.netty.client
+ * 包名       com.azhon.netty.tcp.client
  * 文件名:    ClientHandler
  * 创建时间:  2019-09-07 on 22:54
  * 描述:     TODO

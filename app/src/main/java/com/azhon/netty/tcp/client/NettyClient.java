@@ -1,4 +1,4 @@
-package com.azhon.netty.client;
+package com.azhon.netty.tcp.client;
 
 import android.os.Handler;
 import android.util.Log;
@@ -8,11 +8,9 @@ import java.net.InetSocketAddress;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
-import io.netty.channel.AdaptiveRecvByteBufAllocator;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
@@ -22,7 +20,7 @@ import io.netty.handler.timeout.IdleStateHandler;
 
 /**
  * 项目名:    Netty-Android
- * 包名       com.azhon.netty.client
+ * 包名       com.azhon.netty.tcp.client
  * 文件名:    NettyClient
  * 创建时间:  2019-09-07 on 22:45
  * 描述:     TODO

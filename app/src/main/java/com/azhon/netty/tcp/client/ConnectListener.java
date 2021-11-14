@@ -1,4 +1,4 @@
-package com.azhon.netty.client;
+package com.azhon.netty.tcp.client;
 
 import android.util.Log;
 
@@ -10,7 +10,7 @@ import io.netty.channel.EventLoop;
 
 /**
  * 项目名:    Netty-Android
- * 包名       com.azhon.netty.client
+ * 包名       com.azhon.netty.tcp.client
  * 文件名:    ConnectListener
  * 创建时间:  2019-09-19 on 00:06
  * 描述:     TODO

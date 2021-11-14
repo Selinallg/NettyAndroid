@@ -1,4 +1,4 @@
-package com.azhon.netty.server;
+package com.azhon.netty.tcp.server;
 
 import android.util.Log;
 
@@ -12,7 +12,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 
 /**
  * 项目名:    Netty-Android
- * 包名       com.azhon.netty.server
+ * 包名       com.azhon.netty.tcp.server
  * 文件名:    ServerHandler
  * 创建时间:  2019-09-06 on 00:13
  * 描述:     TODO 数据处理器
