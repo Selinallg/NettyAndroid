@@ -98,6 +98,13 @@ public class ClientHandler extends SimpleChannelInboundHandler<Object> {
         }
     }
 
+
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        super.exceptionCaught(ctx, cause);
+        Log.d(TAG, "exceptionCaught: "+cause.getMessage());
+    }
+
     /**
      * 发送心跳
      */

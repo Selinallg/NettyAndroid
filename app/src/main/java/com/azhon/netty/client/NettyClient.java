@@ -32,10 +32,11 @@ public class NettyClient {
 
     private static final String TAG = "NettyClient";
     private final int PORT = 7010;
-    private final String IP = "192.168.3.105";
+    private final String IP = "192.168.31.102";
     private static NettyClient nettyClient;
     private Channel channel;
     private Handler handler;
+    private Bootstrap bootstrap;
 
     public static NettyClient getInstance() {
         if (nettyClient == null) {
@@ -72,7 +73,7 @@ public class NettyClient {
     public void connect() {
         try {
             NioEventLoopGroup group = new NioEventLoopGroup();
-            Bootstrap bootstrap = new Bootstrap()
+            bootstrap = new Bootstrap()
                     // 指定channel类型
                     .channel(NioSocketChannel.class)
                     // 指定EventLoopGroup
@@ -112,5 +113,18 @@ public class NettyClient {
 
     public void setHandler(Handler handler) {
         this.handler = handler;
+    }
+
+
+    /**
+     * 重连
+     */
+    public void reConnect() {
+        try {
+            ChannelFuture channelFuture = bootstrap.connect(new InetSocketAddress(IP, PORT));
+            channel = channelFuture.sync().channel();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
